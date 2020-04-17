@@ -60,18 +60,9 @@ CREATE TABLE `resources`
     `title`          varchar(255)        NOT NULL,
     `unit`           varchar(255)        NOT NULL,
     `unit_cost`      double              NOT NULL,
+    `measures`       json                NOT NULL,
     `compilation_id` int                 NOT NULL,
     FOREIGN KEY (`compilation_id`) REFERENCES `compilations` (`id`)
-);
-
-CREATE TABLE `resource_measures`
-(
-    `id`          bigint(20) PRIMARY KEY AUTO_INCREMENT,
-    `unit`        varchar(255) NOT NULL,
-    `from`        double       NOT NULL,
-    `to`          double       NOT NULL,
-    `resource_id` bigint(20)   NOT NULL,
-    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`)
 );
 
 CREATE TABLE `work_scope`

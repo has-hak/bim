@@ -5,13 +5,20 @@ package am.nuaca.bim.application.model;
  */
 public class Measure {
 
+	private final MeasureType type;
+
 	private final Unit unit;
 
 	private final double value;
 
-	public Measure(Unit unit, double value) {
+	public Measure(MeasureType type, Unit unit, double value) {
+		this.type = type;
 		this.unit = unit;
 		this.value = value;
+	}
+
+	public MeasureType getType() {
+		return type;
 	}
 
 	public Unit getUnit() {
@@ -20,5 +27,9 @@ public class Measure {
 
 	public double getValue() {
 		return value;
+	}
+
+	public Measure changeValue(Unit unit, double value) {
+		return new Measure(type, unit, value);
 	}
 }

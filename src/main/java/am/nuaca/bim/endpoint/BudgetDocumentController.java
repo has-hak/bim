@@ -2,8 +2,9 @@ package am.nuaca.bim.endpoint;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import am.nuaca.bim.entity.Compilation;
+import am.nuaca.bim.dto.ResourceDto;
 import am.nuaca.bim.service.BudgetDocumentService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,12 @@ public class BudgetDocumentController {
 		this.budgetDocumentService = budgetDocumentService;
 	}
 
-	@PostMapping(produces={"application/json; charset=UTF-8"})
-	public List<Compilation> calculate(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-		return budgetDocumentService.calculate(multipartFile.getInputStream());
+	@PostMapping(produces = {"application/json; charset=UTF-8"})
+	public List<ResourceDto> calculate(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+		return budgetDocumentService.calculate(multipartFile.getInputStream())
+				.stream()
+				.map(resource -> new ResourceDto(resource.getId(), resource.getCode(), resource.getTitle(),
+						resource.getUnit(), resource.getUnitCost(), resource.getMeasures()))
+				.collect(Collectors.toList());
 	}
 }

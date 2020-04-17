@@ -1,6 +1,9 @@
 package am.nuaca.bim.service;
 
-import am.nuaca.bim.application.model.BudgetDocument;
+import java.util.List;
+
+import am.nuaca.bim.entity.Resource;
+import am.nuaca.bim.repository.ResourcesByMeasuresSpecification;
 import am.nuaca.bim.repository.ResourcesRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,9 @@ public class ResourcesService {
 		this.resourcesRepository = resourcesRepository;
 	}
 
-	public void searchByDocument(BudgetDocument budgetDocument){
+	public List<Resource> searchByCriteria(ResourceSearchCriteria resourceSearchCriteria) {
+		ResourcesByMeasuresSpecification specification = new ResourcesByMeasuresSpecification(resourceSearchCriteria);
 
+		return resourcesRepository.findAll(specification);
 	}
 }
