@@ -26,13 +26,15 @@ public class User implements UserDetails {
 	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
 	private Set<Role> roles;
 
 	public User() {
 	}
 
-	public User(String name, String username, String password) {
+	public User(String name, String email, String username, String password) {
 		this.name = name;
+		this.email = email;
 		this.username = username;
 		this.password = password;
 	}

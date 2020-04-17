@@ -25,13 +25,13 @@ public class CompilationService {
 		return Iterables.iterableToList(compilationRepository.findAll());
 	}
 
-	public Long createCompilation(CompilationCreationCommand compilationCreationCommand) {
+	public Integer createCompilation(CompilationCreationCommand compilationCreationCommand) {
 		Compilation compilation = new Compilation(compilationCreationCommand.getTitle());
 		compilation = compilationRepository.save(compilation);
 		return compilation.getId();
 	}
 
-	public boolean updateCompilation(long compilationId, CompilationCreationCommand compilationCreationCommand) {
+	public boolean updateCompilation(int compilationId, CompilationCreationCommand compilationCreationCommand) {
 		if (!compilationRepository.existsById(compilationId)) {
 			return false;
 		}
@@ -42,7 +42,7 @@ public class CompilationService {
 		return true;
 	}
 
-	public boolean deleteCompilation(long compilationId) {
+	public boolean deleteCompilation(int compilationId) {
 		if (!compilationRepository.existsById(compilationId)) {
 			return false;
 		}

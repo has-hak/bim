@@ -41,7 +41,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.successForwardUrl("/");
+				.successHandler(new NoOpAuthenticationSuccessHandler());
 
 		http.logout().permitAll().logoutUrl("/logout").invalidateHttpSession(true);
 	}

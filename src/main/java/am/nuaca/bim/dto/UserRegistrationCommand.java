@@ -10,19 +10,28 @@ public class UserRegistrationCommand {
 
 	private final String name;
 
+	private final String email;
+
 	private final String username;
 
 	private final String password;
 
 	@JsonCreator
-	public UserRegistrationCommand(@JsonProperty("name") String name, @JsonProperty("username") String username, @JsonProperty("password") String password) {
+	public UserRegistrationCommand(@JsonProperty("name") String name, @JsonProperty("email") String email,
+								   @JsonProperty("username") String username,
+								   @JsonProperty("password") String password) {
 		this.name = name;
+		this.email = email;
 		this.username = username;
 		this.password = password;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public String getUsername() {

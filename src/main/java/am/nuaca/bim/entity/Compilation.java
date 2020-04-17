@@ -11,18 +11,18 @@ public class Compilation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	private String title;
 
 	public Compilation() {
 	}
 
-	public Compilation(Long id) {
+	public Compilation(Integer id) {
 		this.id = id;
 	}
 
-	public Compilation(Long id, String title) {
+	public Compilation(Integer id, String title) {
 		this.id = id;
 		this.title = title;
 	}
@@ -31,7 +31,7 @@ public class Compilation {
 		this.title = title;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 

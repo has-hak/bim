@@ -31,13 +31,13 @@ public class CompilationController {
 	}
 
 	@PutMapping("/{compilationId}")
-	public void update(@PathVariable long compilationId,
+	public void update(@PathVariable int compilationId,
 					   @RequestBody CompilationCreationCommand compilationCreationCommand) {
 		compilationService.updateCompilation(compilationId, compilationCreationCommand);
 	}
 
 	@DeleteMapping("/{compilationId}")
-	public void delete(@PathVariable long compilationId) {
+	public void delete(@PathVariable int compilationId) {
 		compilationService.deleteCompilation(compilationId);
 	}
 }
