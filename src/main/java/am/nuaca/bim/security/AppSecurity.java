@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * @author Tigran Sargsyan on 15-Apr-20.
@@ -25,23 +26,22 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http)
-			throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf()
 				.disable()
 				.authorizeRequests()
-				.antMatchers("/registration")
+				.antMatchers("/api/registration")
 				.permitAll()
-				.antMatchers("/login")
+				.antMatchers("/api/login")
 				.permitAll()
 				.anyRequest()
 				.authenticated();
 
 		http.formLogin()
-				.loginProcessingUrl("/login")
+				.loginProcessingUrl("/api/login")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.successHandler(new NoOpAuthenticationSuccessHandler());
+				.successHandler(new SavedRequestAwareAuthenticationSuccessHandler());
 
 		http.logout().permitAll().logoutUrl("/logout").invalidateHttpSession(true);
 	}

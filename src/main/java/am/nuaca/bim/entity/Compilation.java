@@ -31,6 +31,14 @@ public class Compilation {
 		this.title = title;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public Integer getId() {
 		return id;
 	}

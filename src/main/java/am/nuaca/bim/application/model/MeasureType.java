@@ -5,8 +5,8 @@ package am.nuaca.bim.application.model;
  */
 public enum MeasureType {
 	HEIGHT,
+	PERIMETER,
 	THICKNESS,
 	AREA,
 	VOLUME;
-
 }

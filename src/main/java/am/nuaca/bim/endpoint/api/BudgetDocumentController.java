@@ -1,4 +1,4 @@
-package am.nuaca.bim.endpoint;
+package am.nuaca.bim.endpoint.api;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Tigran Sargsyan on 15-Apr-20.
  */
 @RestController
-@RequestMapping("budget-documents")
+@RequestMapping("api/budget-documents")
 public class BudgetDocumentController {
 
 	private final BudgetDocumentService budgetDocumentService;
