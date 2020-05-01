@@ -18,8 +18,27 @@ public class Workforce {
 
 	private String title;
 
-	private String unit;
+	private double unit;
 
 	private double unitCost;
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public double getUnit() {
+		return unit;
+	}
+
+	public double getUnitCost() {
+		return unitCost;
+	}
 }

@@ -1,5 +1,6 @@
 package am.nuaca.bim.entity;
 
+import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 
@@ -39,24 +40,31 @@ public class Resource {
 	@Convert(disableConversion = true)
 	private Map<MeasureType, ResourceMeasureValue> measures;
 
+	@ManyToMany(targetEntity = Machine.class)
+	@JoinTable(name = "resource_machines", joinColumns = @JoinColumn(name = "resource_id"),
+			inverseJoinColumns = @JoinColumn(name = "machine_id"))
+	private List<Machine> machines;
+
+	@ManyToMany(targetEntity = Workforce.class)
+	@JoinTable(name = "resource_workforces", joinColumns = @JoinColumn(name = "resource_id"),
+			inverseJoinColumns = @JoinColumn(name = "workforce_id"))
+	private List<Workforce> workforces;
+
+	@ManyToMany(targetEntity = Material.class)
+	@JoinTable(name = "resource_materials", joinColumns = @JoinColumn(name = "resource_id"),
+			inverseJoinColumns = @JoinColumn(name = "material_id"))
+	private List<Material> materials;
+
 	public Long getId() {
 		return id;
 	}
 
-	public String getCode() {
-		return code;
+	public Code getCode() {
+		return new Code("06", "01", "107-1");
 	}
 
 	public String getTitle() {
 		return title;
-	}
-
-	public String getUnit() {
-		return unit;
-	}
-
-	public double getUnitCost() {
-		return unitCost;
 	}
 
 	public Compilation getCompilation() {
@@ -65,5 +73,17 @@ public class Resource {
 
 	public Map<MeasureType, ResourceMeasureValue> getMeasures() {
 		return measures;
+	}
+
+	public List<Machine> getMachines() {
+		return machines;
+	}
+
+	public List<Workforce> getWorkforces() {
+		return workforces;
+	}
+
+	public List<Material> getMaterials() {
+		return materials;
 	}
 }

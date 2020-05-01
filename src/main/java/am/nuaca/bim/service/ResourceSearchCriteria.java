@@ -2,8 +2,6 @@ package am.nuaca.bim.service;
 
 import java.util.List;
 
-import am.nuaca.bim.application.model.Measure;
-
 /**
  * @author Tigran Sargsyan on 17-Apr-20.
  */
@@ -11,25 +9,18 @@ public class ResourceSearchCriteria {
 
 	private final int compilationId;
 
-	private final String resourceTitle;
+	private final List<ResourceAttributes> resources;
 
-	private final List<Measure> measures;
-
-	public ResourceSearchCriteria(int compilationId, String resourceTitle, List<Measure> measures) {
+	public ResourceSearchCriteria(int compilationId, List<ResourceAttributes> resources) {
 		this.compilationId = compilationId;
-		this.resourceTitle = resourceTitle;
-		this.measures = measures;
+		this.resources = resources;
 	}
 
 	public int getCompilationId() {
 		return compilationId;
 	}
 
-	public String getResourceTitle() {
-		return resourceTitle;
-	}
-
-	public List<Measure> getMeasures() {
-		return measures;
+	public List<ResourceAttributes> getResources() {
+		return resources;
 	}
 }

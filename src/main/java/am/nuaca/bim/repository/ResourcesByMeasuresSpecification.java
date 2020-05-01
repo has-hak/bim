@@ -6,6 +6,7 @@ import javax.persistence.criteria.*;
 import am.nuaca.bim.application.model.Measure;
 import am.nuaca.bim.application.model.MeasureType;
 import am.nuaca.bim.entity.Resource;
+import am.nuaca.bim.service.ResourceAttributes;
 import am.nuaca.bim.service.ResourceSearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -16,49 +17,48 @@ public class ResourcesByMeasuresSpecification implements Specification<Resource>
 
 	private final int compilationId;
 
-	private final String resourceTitle;
-
-	private final List<Measure> measures;
+	private final List<ResourceAttributes> resources;
 
 	public ResourcesByMeasuresSpecification(ResourceSearchCriteria criteria) {
 		this.compilationId = criteria.getCompilationId();
-		this.measures = List.copyOf(criteria.getMeasures());
-		resourceTitle = criteria.getResourceTitle();
+		this.resources = List.copyOf(criteria.getResources());
 	}
 
 	@Override
 	public Predicate toPredicate(Root<Resource> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 		Predicate compilationPredicate = builder.equal(root.get("compilation"), compilationId);
-		Predicate titlePredicate = builder.like(root.get("title"), "%" + resourceTitle + "%");
 
-		Predicate[] measurePredicates = new Predicate[measures.size()];
+		Predicate[] resourcesPredicates = new Predicate[resources.size()];
 
-		for (int i = 0; i < measures.size(); i++) {
-			Measure measure = measures.get(i);
+		for (int i = 0; i < resources.size(); i++) {
+			ResourceAttributes resourceAttributes = resources.get(i);
+			String resourceTitle = resourceAttributes.getTitle();
+			List<Measure> measures = resourceAttributes.getMeasures();
+			Predicate[] resourcePredicates = new Predicate[measures.size() + 1];
 
-			MeasureType type = measure.getType();
-			double value = measure.getValue();
+			resourcePredicates[0] = builder.like(root.get("title"), "%" + resourceTitle + "%");
+			for (int j = 0; j < measures.size(); j++) {
+				Measure measure = measures.get(j);
+				MeasureType type = measure.getType();
+				double value = measure.getValue();
 
-			Expression<Double> keyExpression = builder.function("JSON_EXTRACT", Double.class, root.get("measures"),
-					builder.literal("$." + type));
-			Predicate containsKey = builder.isNotNull(keyExpression);
+				Expression<Double> keyExpression = builder.function("JSON_EXTRACT", Double.class, root.get("measures"),
+						builder.literal("$." + type));
+				Predicate containsKey = builder.isNotNull(keyExpression);
 
-			Expression<Double> startValueExpression = builder.function("JSON_EXTRACT", Double.class,
-					root.get("measures"), builder.literal("$." + type + ".startValue"));
-			Expression<Double> endValueExpression = builder.function("JSON_EXTRACT", Double.class, root.get("measures"),
-					builder.literal("$." + type + ".endValue"));
-			Predicate measurePredicate = builder.or(containsKey.not(),
-					builder.between(builder.literal(value), startValueExpression, endValueExpression));
+				Expression<Double> startValueExpression = builder.function("JSON_EXTRACT", Double.class,
+						root.get("measures"), builder.literal("$." + type + ".startValue"));
+				Expression<Double> endValueExpression = builder.function("JSON_EXTRACT", Double.class,
+						root.get("measures"), builder.literal("$." + type + ".endValue"));
+				Predicate measurePredicate = builder.or(containsKey.not(),
+						builder.between(builder.literal(value), startValueExpression, endValueExpression));
 
-			measurePredicates[i] = measurePredicate;
+				resourcePredicates[j + 1] = measurePredicate;
+			}
+
+			resourcesPredicates[i] = builder.and(resourcePredicates);
 		}
 
-		Predicate[] predicates = new Predicate[measurePredicates.length + 2];
-		predicates[0] = compilationPredicate;
-		predicates[1] = titlePredicate;
-
-		System.arraycopy(measurePredicates, 0, predicates, 2, measurePredicates.length);
-
-		return builder.and(predicates);
+		return builder.or(compilationPredicate, builder.and(resourcesPredicates));
 	}
 }

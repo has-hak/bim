@@ -18,7 +18,27 @@ public class Machine {
 
 	private String title;
 
-	private String unit;
+	private double unit;
 
 	private double unitCost;
+
+	public Long getId() {
+		return id;
+	}
+
+	public Code getCode() {
+		return new Code("19", "100", "1005");
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public double getUnit() {
+		return unit;
+	}
+
+	public double getUnitCost() {
+		return unitCost;
+	}
 }

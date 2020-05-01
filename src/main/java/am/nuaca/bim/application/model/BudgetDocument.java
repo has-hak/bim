@@ -9,25 +9,18 @@ public class BudgetDocument {
 
 	private final String compilationName;
 
-	private final String resourceTitle;
+	private final List<BudgetDocumentResource> resources;
 
-	private final List<Measure> measures;
-
-	public BudgetDocument(String compilationName, String resourceTitle, List<Measure> measures) {
+	public BudgetDocument(String compilationName, List<BudgetDocumentResource> resources) {
 		this.compilationName = compilationName;
-		this.resourceTitle = resourceTitle;
-		this.measures = measures;
+		this.resources = resources;
 	}
 
 	public String getCompilationName() {
 		return compilationName;
 	}
 
-	public String getResourceTitle() {
-		return resourceTitle;
-	}
-
-	public List<Measure> getMeasures() {
-		return measures;
+	public List<BudgetDocumentResource> getResources() {
+		return resources;
 	}
 }

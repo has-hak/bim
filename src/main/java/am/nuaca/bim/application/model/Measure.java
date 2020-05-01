@@ -7,13 +7,13 @@ public class Measure {
 
 	private final MeasureType type;
 
-	private final Unit unit;
+	private final MeasureUnit measureUnit;
 
 	private final double value;
 
-	public Measure(MeasureType type, Unit unit, double value) {
+	public Measure(MeasureType type, MeasureUnit measureUnit, double value) {
 		this.type = type;
-		this.unit = unit;
+		this.measureUnit = measureUnit;
 		this.value = value;
 	}
 
@@ -21,15 +21,15 @@ public class Measure {
 		return type;
 	}
 
-	public Unit getUnit() {
-		return unit;
+	public MeasureUnit getMeasureUnit() {
+		return measureUnit;
 	}
 
 	public double getValue() {
 		return value;
 	}
 
-	public Measure changeValue(Unit unit, double value) {
-		return new Measure(type, unit, value);
+	public Measure changeValue(MeasureUnit measureUnit, double value) {
+		return new Measure(type, measureUnit, value);
 	}
 }

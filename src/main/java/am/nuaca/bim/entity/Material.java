@@ -1,7 +1,8 @@
 package am.nuaca.bim.entity;
 
-import java.util.List;
 import javax.persistence.*;
+
+import am.nuaca.bim.application.model.MeasureType;
 
 /**
  * @author Tigran Sargsyan on 15-Apr-20.
@@ -17,13 +18,36 @@ public class Material {
 	@Column(unique = true)
 	private String code;
 
-	private String unit;
+	private String title;
 
-	private double unitVolume;
+	private double unit;
 
 	private double unitCost;
 
-	@ManyToMany
-	@JoinTable(name = "materials_compilations")
-	private List<Compilation> compilation;
+	@Enumerated(EnumType.STRING)
+	private MeasureType measureType;
+
+	public Long getId() {
+		return id;
+	}
+
+	public Code getCode() {
+		return new Code("2105", "0301", "3001");
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public double getUnit() {
+		return unit;
+	}
+
+	public double getUnitCost() {
+		return unitCost;
+	}
+
+	public MeasureType getMeasureType() {
+		return measureType;
+	}
 }

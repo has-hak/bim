@@ -8,5 +8,6 @@ public enum MeasureType {
 	PERIMETER,
 	THICKNESS,
 	AREA,
-	VOLUME;
+	VOLUME,
+	WEIGHT;
 }

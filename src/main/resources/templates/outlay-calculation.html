@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Outlay calculation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Նախահաշիվ</h1>
+<form th:action="@{/api/outlay}" method="post" enctype="multipart/form-data">
+    <p>Ծավալաթերթ։ <input type="file" name="file"/></p>
+    <p><input type="submit" value="Հաստատել"/>
+</form>
+</body>
+</html>
