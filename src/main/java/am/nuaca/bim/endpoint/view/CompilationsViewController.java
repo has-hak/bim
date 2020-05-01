@@ -24,7 +24,7 @@ public class CompilationsViewController {
 		this.compilationService = compilationService;
 	}
 
-	@GetMapping(value = {"/", "/compilations"})
+	@GetMapping(value = {"/compilations"})
 	public String compilations(Model model) {
 		List<Compilation> allCompilations = compilationService.getAllCompilations();
 		model.addAttribute("compilations", allCompilations);
