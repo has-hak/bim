@@ -153,6 +153,7 @@ public class OutlayDocumentBuilder {
 		short fontSize = 13 * 20;
 		font.setFontHeight(fontSize);
 		font.setBold(true);
+		font.setFontName("Sylfaen");
 		cellStyle.setFont(font);
 		titleCell.setCellStyle(cellStyle);
 		cellStyle.setFillForegroundColor(IndexedColors.YELLOW.index);
@@ -363,6 +364,9 @@ public class OutlayDocumentBuilder {
 		CellStyle cellStyle = createEmptyCellStyle();
 		cellStyle.setAlignment(HorizontalAlignment.CENTER);
 		cell.setCellStyle(cellStyle);
+		Font font = sheet.getWorkbook().createFont();
+		font.setFontName("Sylfaen");
+		cellStyle.setFont(font);
 	}
 
 	private CellStyle createEmptyCellStyle() {
@@ -374,6 +378,7 @@ public class OutlayDocumentBuilder {
 		Font font = sheet.getWorkbook().createFont();
 		short fontSize = 12 * 20;
 		font.setFontHeight(fontSize);
+		font.setFontName("Sylfaen");
 		font.setBold(true);
 		cellStyle.setFont(font);
 		cell.setCellStyle(cellStyle);
@@ -386,6 +391,7 @@ public class OutlayDocumentBuilder {
 		Font font = sheet.getWorkbook().createFont();
 		short fontSize = 12 * 20;
 		font.setFontHeight(fontSize);
+		font.setFontName("Sylfaen");
 		font.setBold(true);
 		cellStyle.setFont(font);
 		cell.setCellStyle(cellStyle);
@@ -399,6 +405,7 @@ public class OutlayDocumentBuilder {
 		Font font = sheet.getWorkbook().createFont();
 		short fontSize = 11 * 20;
 		font.setFontHeight(fontSize);
+		font.setFontName("Sylfaen");
 		font.setBold(true);
 		cellStyle.setFont(font);
 		cell.setCellStyle(cellStyle);
