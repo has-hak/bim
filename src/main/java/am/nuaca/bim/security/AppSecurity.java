@@ -1,11 +1,13 @@
 package am.nuaca.bim.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author Tigran Sargsyan on 15-Apr-20.
@@ -27,7 +29,9 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf()
+		http.cors()
+				.and()
+				.csrf()
 				.disable()
 				.authorizeRequests()
 				.antMatchers("/api/registration")
@@ -35,14 +39,18 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/login")
 				.permitAll()
 				.anyRequest()
-				.authenticated();
+				.authenticated()
+				.and()
+				.httpBasic()
+				.and()
+				.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
 
-		http.formLogin()
-				.loginProcessingUrl("/api/login")
-				.usernameParameter("username")
-				.passwordParameter("password")
-				.successHandler(new SavedRequestAwareAuthenticationSuccessHandler());
-
-		http.logout().permitAll().logoutUrl("/logout").invalidateHttpSession(true);
+	@Bean
+	public RequestBodyReaderAuthenticationFilter authenticationFilter() throws Exception {
+		RequestBodyReaderAuthenticationFilter authenticationFilter = new RequestBodyReaderAuthenticationFilter();
+		authenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/login", "POST"));
+		authenticationFilter.setAuthenticationManager(authenticationManagerBean());
+		return authenticationFilter;
 	}
 }

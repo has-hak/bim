@@ -7,7 +7,7 @@ CREATE TABLE `users`
     `email`    varchar(255) NOT NULL
 );
 
-CREATE TABLE `user_role`
+CREATE TABLE `user_roles`
 (
     `user_id` bigint(20)   NOT NULL,
     `role`    varchar(255) NOT NULL,
