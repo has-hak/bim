@@ -36,6 +36,15 @@ public class OutlayService {
 
 	public void calculateOutlayFromBudgetDocument(InputStream budgetDocumentStream,
 												  OutputStream costDocumentOutputStream) throws IOException, InvalidBudgetDocumentException {
+		List<Resource> resources = processBudgetDocument(budgetDocumentStream);
+
+		OutlayDocumentBuilder outlayDocumentBuilder = new OutlayDocumentBuilder(resources);
+		outlayDocumentBuilder.build(costDocumentOutputStream);
+	}
+
+	public List<Resource> processBudgetDocument(
+			InputStream budgetDocumentStream) throws IOException, InvalidBudgetDocumentException {
+
 		BudgetDocumentReader budgetDocumentReader = new BudgetDocumentReader(budgetDocumentStream);
 		BudgetDocument budgetDocument = budgetDocumentReader.read();
 
@@ -47,11 +56,8 @@ public class OutlayService {
 						standardizeMeasures(budgetDocumentResource.getMeasures())))
 				.collect(Collectors.toList());
 
-		List<Resource> resources = resourcesService.searchByCriteria(
-				new ResourceSearchCriteria(compilation.getId(), resourceAttributes));
+		return resourcesService.searchByCriteria(new ResourceSearchCriteria(compilation.getId(), resourceAttributes));
 
-		OutlayDocumentBuilder outlayDocumentBuilder = new OutlayDocumentBuilder(resources);
-		outlayDocumentBuilder.build(costDocumentOutputStream);
 	}
 
 	private static List<Measure> standardizeMeasures(List<Measure> measures) {

@@ -1,10 +1,9 @@
 CREATE TABLE `users`
 (
     `id`       bigint(20) PRIMARY KEY AUTO_INCREMENT,
-    `username` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL,
+    `email`    varchar(255) NOT NULL UNIQUE,
     `name`     varchar(255) NOT NULL,
-    `email`    varchar(255) NOT NULL
+    `password` varchar(255) NOT NULL
 );
 
 CREATE TABLE `user_roles`

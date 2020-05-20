@@ -11,8 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class RequestBodyReaderAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -47,6 +49,14 @@ public class RequestBodyReaderAuthenticationFilter extends UsernamePasswordAuthe
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 											Authentication authResult) throws IOException, ServletException {
+		if (this.logger.isDebugEnabled()) {
+			this.logger.debug("Authentication success. Updating SecurityContextHolder to contain: " + authResult);
+		}
+
+		SecurityContextHolder.getContext().setAuthentication(authResult);
+		if (this.eventPublisher != null) {
+			this.eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(authResult, this.getClass()));
+		}
 	}
 
 	@Override

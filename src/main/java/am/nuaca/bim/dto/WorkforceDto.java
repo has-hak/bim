@@ -1,14 +1,11 @@
 package am.nuaca.bim.dto;
 
-import java.util.Map;
-
 import am.nuaca.bim.application.model.MeasureType;
-import am.nuaca.bim.entity.ResourceMeasureValue;
 
 /**
  * @author Tigran Sargsyan on 17-Apr-20.
  */
-public class ResourceDto {
+public class WorkforceDto {
 
 	private final Long id;
 
@@ -16,13 +13,16 @@ public class ResourceDto {
 
 	private final String title;
 
-	private final Map<MeasureType, ResourceMeasureValue> measures;
+	private final double unit;
 
-	public ResourceDto(Long id, String code, String title, Map<MeasureType, ResourceMeasureValue> measures) {
+	private final double unitCost;
+
+	public WorkforceDto(Long id, String code, String title, double unit, double unitCost) {
 		this.id = id;
 		this.code = code;
 		this.title = title;
-		this.measures = measures;
+		this.unit = unit;
+		this.unitCost = unitCost;
 	}
 
 	public Long getId() {
@@ -37,7 +37,11 @@ public class ResourceDto {
 		return title;
 	}
 
-	public Map<MeasureType, ResourceMeasureValue> getMeasures() {
-		return measures;
+	public double getUnit() {
+		return unit;
+	}
+
+	public double getUnitCost() {
+		return unitCost;
 	}
 }

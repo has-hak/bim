@@ -24,8 +24,8 @@ public class AuthService {
 	public void registerNewUser(UserRegistrationCommand userRegistrationCommand) {
 		String rawPassword = userRegistrationCommand.getPassword();
 		String encodedPassword = passwordEncoder.encode(rawPassword);
-		User user = new User(userRegistrationCommand.getName(), userRegistrationCommand.getEmail(),
-				userRegistrationCommand.getUsername(), encodedPassword);
+		User user = new User(userRegistrationCommand.getEmail(), encodedPassword,
+				userRegistrationCommand.getFullName());
 		userRepository.save(user);
 	}
 }

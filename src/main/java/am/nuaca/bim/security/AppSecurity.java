@@ -38,12 +38,20 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers("/api/login")
 				.permitAll()
+				.antMatchers("/api/logout")
+				.permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()
-				.httpBasic()
-				.and()
-				.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+				.formLogin()
+				.disable()
+				.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+				.exceptionHandling()
+				.authenticationEntryPoint(securityException401EntryPoint());
+
+		http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
+
+		http.httpBasic().disable();
 	}
 
 	@Bean
@@ -52,5 +60,10 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 		authenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/login", "POST"));
 		authenticationFilter.setAuthenticationManager(authenticationManagerBean());
 		return authenticationFilter;
+	}
+
+	@Bean
+	public Http401AuthenticationEntryPoint securityException401EntryPoint() {
+		return new Http401AuthenticationEntryPoint();
 	}
 }

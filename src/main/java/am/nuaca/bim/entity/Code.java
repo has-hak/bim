@@ -26,4 +26,9 @@ public class Code {
 	public String getPart3() {
 		return part3;
 	}
+
+	@Override
+	public String toString() {
+		return part1 + "-" + part2 + "-" + part3;
+	}
 }
