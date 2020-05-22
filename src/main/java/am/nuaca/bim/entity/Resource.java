@@ -55,6 +55,19 @@ public class Resource {
 			inverseJoinColumns = @JoinColumn(name = "material_id"))
 	private List<Material> materials;
 
+	public static Resource forCompilation(Compilation compilation, String code, String title,
+										  Map<MeasureType, ResourceMeasureValue> measures) {
+		Resource resource = new Resource();
+		resource.compilation = compilation;
+		resource.code = code;
+		resource.title = title;
+		resource.measures = measures;
+		resource.unit = "";
+		resource.unitCost = -1;
+
+		return resource;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import am.nuaca.bim.dto.CompilationCreationCommand;
 import am.nuaca.bim.entity.Compilation;
 import am.nuaca.bim.service.CompilationService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +27,7 @@ public class CompilationController {
 	}
 
 	@PostMapping
+	@Secured({"MANAGER", "ADMIN"})
 	public void create(@RequestBody CompilationCreationCommand compilationCreationCommand) {
 		compilationService.createCompilation(compilationCreationCommand);
 	}

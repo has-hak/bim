@@ -22,6 +22,16 @@ public class Workforce {
 
 	private double unitCost;
 
+	public Workforce() {
+	}
+
+	public Workforce(String code, String title, double unit, double unitCost) {
+		this.code = code;
+		this.title = title;
+		this.unit = unit;
+		this.unitCost = unitCost;
+	}
+
 	public Long getId() {
 		return id;
 	}

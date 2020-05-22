@@ -27,6 +27,17 @@ public class Material {
 	@Enumerated(EnumType.STRING)
 	private MeasureType measureType;
 
+	public Material() {
+	}
+
+	public Material(String code, String title, double unit, double unitCost, MeasureType measureType) {
+		this.code = code;
+		this.title = title;
+		this.unit = unit;
+		this.unitCost = unitCost;
+		this.measureType = measureType;
+	}
+
 	public Long getId() {
 		return id;
 	}

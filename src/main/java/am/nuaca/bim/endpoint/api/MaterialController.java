@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import am.nuaca.bim.dto.MaterialCreationCommand;
 import am.nuaca.bim.dto.MaterialDto;
+import am.nuaca.bim.entity.Material;
 import am.nuaca.bim.repository.MaterialRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Tigran Sargsyan on 07-May-20.
@@ -21,6 +22,15 @@ public class MaterialController {
 
 	public MaterialController(MaterialRepository materialRepository) {
 		this.materialRepository = materialRepository;
+	}
+
+	@PostMapping
+	@Secured({"MANAGER", "ADMIN"})
+	public void create(@RequestBody MaterialCreationCommand command) {
+		Material material = new Material(command.getCode(), command.getTitle(), command.getUnit(),
+				command.getUnitCost(), command.getMeasureType());
+
+		materialRepository.save(material);
 	}
 
 	@GetMapping

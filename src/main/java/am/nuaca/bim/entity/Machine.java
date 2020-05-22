@@ -22,6 +22,16 @@ public class Machine {
 
 	private double unitCost;
 
+	public Machine() {
+	}
+
+	public Machine(String code, String title, double unit, double unitCost) {
+		this.code = code;
+		this.title = title;
+		this.unit = unit;
+		this.unitCost = unitCost;
+	}
+
 	public Long getId() {
 		return id;
 	}

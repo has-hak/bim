@@ -8,14 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CompilationCreationCommand {
 
-	private String title;
+	private final String title;
 
 	@JsonCreator
 	public CompilationCreationCommand(@JsonProperty("title") String title) {
-		this.title = title;
-	}
-
-	public void setTitle(String title) {
 		this.title = title;
 	}
 
