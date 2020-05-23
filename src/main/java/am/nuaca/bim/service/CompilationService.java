@@ -3,10 +3,13 @@ package am.nuaca.bim.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import am.nuaca.bim.dto.CompilationCreationCommand;
 import am.nuaca.bim.entity.Compilation;
 import am.nuaca.bim.helper.Iterables;
 import am.nuaca.bim.repository.CompilationRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +18,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompilationService {
 
+	@Value("${spring.datasource.password}")
+	private  String pass;
+
 	private final CompilationRepository compilationRepository;
+
+
+
+	@PostConstruct
+	public void foo(){
+		System.out.println(pass.repeat(10));
+		System.out.println(pass.repeat(10));
+		System.out.println(pass.repeat(10));
+
+	}
 
 	public CompilationService(CompilationRepository compilationRepository) {
 		this.compilationRepository = compilationRepository;
