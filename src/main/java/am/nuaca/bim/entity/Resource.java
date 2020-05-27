@@ -28,10 +28,6 @@ public class Resource {
 
 	private String title;
 
-	private String unit;
-
-	private double unitCost;
-
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private Compilation compilation;
 
@@ -56,14 +52,16 @@ public class Resource {
 	private List<Material> materials;
 
 	public static Resource forCompilation(Compilation compilation, String code, String title,
-										  Map<MeasureType, ResourceMeasureValue> measures) {
+										  Map<MeasureType, ResourceMeasureValue> measures, List<Machine> machines,
+										  List<Workforce> workforces, List<Material> materials) {
 		Resource resource = new Resource();
 		resource.compilation = compilation;
 		resource.code = code;
 		resource.title = title;
 		resource.measures = measures;
-		resource.unit = "";
-		resource.unitCost = -1;
+		resource.machines = machines;
+		resource.workforces = workforces;
+		resource.materials = materials;
 
 		return resource;
 	}

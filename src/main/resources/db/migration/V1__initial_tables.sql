@@ -15,8 +15,15 @@ CREATE TABLE `user_roles`
 
 CREATE TABLE `languages`
 (
-    `id`   int PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255) NOT NULL
+    `id`   int UNIQUE          NOT NULL,
+    `name` varchar(255) UNIQUE NOT NULL,
+    UNIQUE (id, name)
+);
+
+CREATE TABLE `messages`
+(
+    `id`     varchar(255) PRIMARY KEY,
+    `values` json NOT NULL
 );
 
 CREATE TABLE `compilations`
@@ -50,8 +57,6 @@ CREATE TABLE `resources`
     `id`             bigint(20) PRIMARY KEY AUTO_INCREMENT,
     `code`           varchar(255) UNIQUE NOT NULL,
     `title`          varchar(255)        NOT NULL,
-    `unit`           varchar(255)        NOT NULL,
-    `unit_cost`      double              NOT NULL,
     `measures`       json                NOT NULL,
     `compilation_id` int                 NOT NULL,
     FOREIGN KEY (`compilation_id`) REFERENCES `compilations` (`id`),
@@ -77,22 +82,22 @@ CREATE TABLE `resource_machines`
 (
     `resource_id` bigint(20) NOT NULL,
     `machine_id`  bigint(20) NOT NULL,
-    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`),
-    FOREIGN KEY (`machine_id`) REFERENCES `machines` (`id`)
+    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`machine_id`) REFERENCES `machines` (`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `resource_workforces`
 (
     `resource_id`  bigint(20) NOT NULL,
     `workforce_id` bigint(20) NOT NULL,
-    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`),
-    FOREIGN KEY (`workforce_id`) REFERENCES `workforces` (`id`)
+    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`workforce_id`) REFERENCES `workforces` (`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `resource_materials`
 (
     `resource_id` bigint(20) NOT NULL,
     `material_id` bigint(20) NOT NULL,
-    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`),
-    FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`)
+    FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE
 );

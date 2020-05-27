@@ -40,6 +40,8 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers("/api/logout")
 				.permitAll()
+				.antMatchers("/api/languages/**")
+				.permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()

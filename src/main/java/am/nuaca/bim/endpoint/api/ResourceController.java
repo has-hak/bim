@@ -9,10 +9,9 @@ import am.nuaca.bim.dto.ResourceCreationCommand;
 import am.nuaca.bim.dto.ResourceDto;
 import am.nuaca.bim.dto.ResourcesResponse;
 import am.nuaca.bim.dto.StandardsDto;
-import am.nuaca.bim.entity.Compilation;
-import am.nuaca.bim.entity.Resource;
-import am.nuaca.bim.repository.CompilationRepository;
-import am.nuaca.bim.repository.ResourcesRepository;
+import am.nuaca.bim.entity.*;
+import am.nuaca.bim.helper.Iterables;
+import am.nuaca.bim.repository.*;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +26,20 @@ public class ResourceController {
 
 	private final ResourcesRepository resourcesRepository;
 
-	public ResourceController(CompilationRepository compilationRepository, ResourcesRepository resourcesRepository) {
+	private final MachineRepository machineRepository;
+
+	private final WorkforceRepository workforceRepository;
+
+	private final MaterialRepository materialRepository;
+
+	public ResourceController(CompilationRepository compilationRepository, ResourcesRepository resourcesRepository,
+							  MachineRepository machineRepository, WorkforceRepository workforceRepository,
+							  MaterialRepository materialRepository) {
 		this.compilationRepository = compilationRepository;
 		this.resourcesRepository = resourcesRepository;
+		this.machineRepository = machineRepository;
+		this.workforceRepository = workforceRepository;
+		this.materialRepository = materialRepository;
 	}
 
 	@PostMapping
@@ -38,8 +48,16 @@ public class ResourceController {
 		Compilation compilation = compilationRepository.findById(resourceCreationCommand.getCompilationId())
 				.orElseThrow(IllegalArgumentException::new);
 
+		List<Machine> machines = Iterables.iterableToList(
+				machineRepository.findAllById(resourceCreationCommand.getMachineIds()));
+		List<Workforce> workforces = Iterables.iterableToList(
+				workforceRepository.findAllById(resourceCreationCommand.getMachineIds()));
+		List<Material> materials = Iterables.iterableToList(
+				materialRepository.findAllById(resourceCreationCommand.getMachineIds()));
+
 		Resource resource = Resource.forCompilation(compilation, resourceCreationCommand.getCode(),
-				resourceCreationCommand.getTitle(), Collections.emptyMap());
+				resourceCreationCommand.getTitle(), Collections.emptyMap(), machines, workforces, materials);
+
 		resourcesRepository.save(resource);
 	}
 

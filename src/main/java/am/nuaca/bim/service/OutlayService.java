@@ -48,7 +48,11 @@ public class OutlayService {
 		BudgetDocumentReader budgetDocumentReader = new BudgetDocumentReader(budgetDocumentStream);
 		BudgetDocument budgetDocument = budgetDocumentReader.read();
 
-		Compilation compilation = compilationService.searchByName(budgetDocument.getCompilationName()).get(0);
+		List<Compilation> compilations = compilationService.searchByName(budgetDocument.getCompilationName());
+		if (compilations.isEmpty()) {
+			throw new IllegalArgumentException("No compilation found");
+		}
+		Compilation compilation = compilations.get(0);
 
 		List<ResourceAttributes> resourceAttributes = budgetDocument.getResources()
 				.stream()
