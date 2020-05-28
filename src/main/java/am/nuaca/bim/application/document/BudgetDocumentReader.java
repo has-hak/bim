@@ -3,6 +3,7 @@ package am.nuaca.bim.application.document;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import am.nuaca.bim.application.model.*;
 import io.vavr.Tuple;
@@ -53,10 +54,11 @@ public class BudgetDocumentReader {
 
 		Row headersRow = rowIterator.next();
 
-		List<String> headers = new ArrayList<>();
+		List<Header> headers = new ArrayList<>();
 
 		Map<String, MeasureUnit> unitsOfMeasures = new HashMap<>();
 
+		AtomicInteger index = new AtomicInteger(0);
 		headersRow.forEach(cell -> {
 			CellType cellType = cell.getCellType();
 			if (cellType != CellType.STRING) {
@@ -67,25 +69,25 @@ public class BudgetDocumentReader {
 			String header = cell.getStringCellValue().strip().toLowerCase();
 
 			if (KNOWN_HEADERS.contains(header)) {
-				headers.add(header);
+				headers.add(new Header(header, index.get()));
 			}
 			else {
 				String foundHeader = KNOWN_MEASURE_HEADERS.stream()
 						.map(Tuple2::_2)
-						.filter(header::contains)
+						.filter(knownHeader -> header.toLowerCase().contains(knownHeader))
 						.findFirst()
-						.orElseThrow(
-								() -> new InvalidBudgetDocumentException(String.format("Unknown header %s", header)));
+						.orElse(null);
 
-				String unitString = header.substring(header.indexOf(foundHeader) + foundHeader.length())
-						.strip()
-						.replaceAll("[()]", "");
+				if (foundHeader != null) {
+					String unitString = header.substring(header.indexOf(foundHeader)).strip().replaceAll("[()]", "");
 
-				MeasureUnit measureUnit = MeasureUnit.fromString(unitString);
+					MeasureUnit measureUnit = MeasureUnit.fromString(unitString);
 
-				headers.add(foundHeader);
-				unitsOfMeasures.put(foundHeader, measureUnit);
+					headers.add(new Header(foundHeader, index.get()));
+					unitsOfMeasures.put(foundHeader, measureUnit);
+				}
 			}
+			index.incrementAndGet();
 		});
 
 		List<Map<String, Object>> data = new ArrayList<>();
@@ -94,16 +96,15 @@ public class BudgetDocumentReader {
 			Row row = rowIterator.next();
 
 			Map<String, Object> rowData = new HashMap<>();
-			for (int i = 0; i < headers.size(); i++) {
-				String header = headers.get(i);
-				Cell cell = row.getCell(i);
+			for (Header header : headers) {
+				Cell cell = row.getCell(header.getIndex());
 				if (cell == null) {
-					rowData.put(header, null);
+					rowData.put(header.getName(), null);
 				}
 				else {
 					CellType cellType = cell.getCellType();
 
-					Set<CellType> cellTypes = SUPPORTED_CELL_TYPES.get(header);
+					Set<CellType> cellTypes = SUPPORTED_CELL_TYPES.get(header.getName());
 					if (!cellTypes.contains(cellType)) {
 						throw new InvalidBudgetDocumentException(
 								String.format("Invalid cell type %s for header %s. Supported types are %s", cellType,
@@ -112,7 +113,7 @@ public class BudgetDocumentReader {
 
 					Object cellValue = getCellValue(cell);
 
-					rowData.put(header, cellValue);
+					rowData.put(header.getName(), cellValue);
 				}
 			}
 
@@ -161,6 +162,24 @@ public class BudgetDocumentReader {
 				return cell.getNumericCellValue();
 			default:
 				throw new IllegalStateException(String.format("Unsupported cell type %s ", cellType));
+		}
+	}
+
+	private static final class Header {
+		private final String name;
+		private final int index;
+
+		private Header(String name, int index) {
+			this.name = name;
+			this.index = index;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getIndex() {
+			return index;
 		}
 	}
 }
