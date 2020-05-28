@@ -79,7 +79,7 @@ public class BudgetDocumentReader {
 						.orElse(null);
 
 				if (foundHeader != null) {
-					String unitString = header.substring(header.indexOf(foundHeader)).strip().replaceAll("[()]", "");
+					String unitString = header.substring(header.indexOf('(')).strip().replaceAll("[()]", "");
 
 					MeasureUnit measureUnit = MeasureUnit.fromString(unitString);
 
