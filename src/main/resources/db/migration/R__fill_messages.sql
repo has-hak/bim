@@ -21,6 +21,11 @@ VALUES ('ENG', '{
 		   "2": "Ժողովածուներ",
 		   "3": "Сборники"
 	   }'),
+       ('compilation', '{
+		   "1": "Compilation",
+		   "2": "Ժողովածու",
+		   "3": "Сборник"
+	   }'),
        ('resources', '{
 		   "1": "Resources",
 		   "2": "Աշխատանքներ",
@@ -64,12 +69,12 @@ VALUES ('ENG', '{
        ('ui.main.outlay-calculation', '{
 		   "1": "Outlay Calculation",
 		   "2": "Նախահաշվի կազմում",
-		   "3": "Непонятно"
+		   "3": "Расчет сметы"
 	   }'),
        ('ui.main.outlay-calculation.select-document', '{
 		   "1": "Select document",
 		   "2": "Ընտրեք ծավալաթերթը",
-		   "3": "Выберите непонятный документ"
+		   "3": "Выберите документ"
 	   }'),
        ('ui.main.outlay-calculation.select-file', '{
 		   "1": "Select File",
@@ -111,6 +116,41 @@ VALUES ('ENG', '{
 		   "2": "Չափման միավոր",
 		   "3": "Тип измирения"
 	   }'),
+       ('ui.create', '{
+		   "1": "Create",
+		   "2": "Ավելացնել",
+		   "3": "Добавить"
+	   }'),
+       ('ui.forms.compilation.create', '{
+		   "1": "Create new compilation",
+		   "2": "Ավելացնել նոր ժողավածու",
+		   "3": "Добавить новый сборник"
+	   }'),
+       ('ui.forms.resource.create', '{
+		   "1": "Create new resource",
+		   "2": "Ավելացնել նոր աշխատանք",
+		   "3": "Добавить новую работу"
+	   }'),
+       ('ui.forms.workforce.create', '{
+		   "1": "Create new workforce",
+		   "2": "Ավելացնել նոր աշխատուժ",
+		   "3": "Добавить новую рабочую силу"
+	   }'),
+       ('ui.forms.machine.create', '{
+		   "1": "Create new machine",
+		   "2": "Ավելացնել նոր մեքենա",
+		   "3": "Добавить новую машину"
+	   }'),
+       ('ui.forms.material.create', '{
+		   "1": "Create new material",
+		   "2": "Ավելացնել նոր նյութ",
+		   "3": "Добавить новый материал"
+	   }'),
+       ('ui.main.data-view.add-new', '{
+		   "1": "Add New",
+		   "2": "Ավելացնել",
+		   "3": "Добавить"
+	   }'),
        ('ui.main.outlay-table.structure', '{
 		   "1": "Structure",
 		   "2": "Կառուցվածք",
@@ -120,6 +160,11 @@ VALUES ('ENG', '{
 		   "1": "Machine/mechanisms",
 		   "2": "Մեքենա/մեխանիզմենր",
 		   "3": "Машины/Механизмы"
+	   }'),
+       ('ui.main.outlay-table.overall-cost', '{
+		   "1": "Overall cost",
+		   "2": "Ընդհանուր ծախսեր",
+		   "3": "Общие затраты"
 	   }'),
        ('ui.main.outlay-table.total-cost', '{
 		   "1": "Total cost",
@@ -161,22 +206,22 @@ VALUES ('ENG', '{
 		   "2": "Պարագիծ",
 		   "3": "Периметр"
 	   }'),
-       ('measure-types.thickness', '{
+       ('measure-types.THICKNESS', '{
 		   "1": "Thickness",
 		   "2": "Հաստություն",
 		   "3": "Толщина"
 	   }'),
-       ('measure-types.area', '{
+       ('measure-types.AREA', '{
 		   "1": "Area",
 		   "2": "Մակերես",
 		   "3": "Площадь"
 	   }'),
-       ('measure-types.volume', '{
+       ('measure-types.VOLUME', '{
 		   "1": "Volume",
 		   "2": "Ծավալ",
 		   "3": "Объем"
 	   }'),
-       ('measure-types.weight', '{
+       ('measure-types.WEIGHT', '{
 		   "1": "Weight",
 		   "2": "Քաշ",
 		   "3": "Масса"
