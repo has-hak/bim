@@ -196,12 +196,12 @@ VALUES ('ENG', '{
 		   "2": "Ընդամենը նախահաշվային արժեք",
 		   "3": "Общая сметная цена"
 	   }'),
-       ('measure-types.height', '{
+       ('measure-types.HEIGHT', '{
 		   "1": "Height",
 		   "2": "Բարձրություն",
 		   "3": "Высота"
 	   }'),
-       ('measure-types.perimeter', '{
+       ('measure-types.PERIMETER', '{
 		   "1": "Perimeter",
 		   "2": "Պարագիծ",
 		   "3": "Периметр"
