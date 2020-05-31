@@ -44,28 +44,48 @@ public class ResourceController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody ResourceCreationCommand resourceCreationCommand) {
-		Compilation compilation = compilationRepository.findById(resourceCreationCommand.getCompilationId())
+	public void create(@RequestBody ResourceCreationCommand command) {
+		Compilation compilation = compilationRepository.findById(command.getCompilationId())
 				.orElseThrow(IllegalArgumentException::new);
 
-		List<Machine> machines = Iterables.iterableToList(
-				machineRepository.findAllById(resourceCreationCommand.getMachineIds()));
-		List<Workforce> workforces = Iterables.iterableToList(
-				workforceRepository.findAllById(resourceCreationCommand.getMachineIds()));
-		List<Material> materials = Iterables.iterableToList(
-				materialRepository.findAllById(resourceCreationCommand.getMachineIds()));
+		List<Machine> machines = Iterables.iterableToList(machineRepository.findAllById(command.getMachineIds()));
+		List<Workforce> workforces = Iterables.iterableToList(workforceRepository.findAllById(command.getMachineIds()));
+		List<Material> materials = Iterables.iterableToList(materialRepository.findAllById(command.getMachineIds()));
 
-		Resource resource = Resource.forCompilation(compilation, resourceCreationCommand.getCode(),
-				resourceCreationCommand.getTitle(), Collections.emptyMap(), machines, workforces, materials);
+		Resource resource = Resource.forCompilation(compilation, command.getCode(), command.getTitle(),
+				Collections.emptyMap(), machines, workforces, materials);
 
 		resourcesRepository.save(resource);
+	}
+
+	@PutMapping("/{resourceId}")
+	public void update(@PathVariable long resourceId, @RequestBody ResourceCreationCommand command) {
+		Compilation compilation = compilationRepository.findById(command.getCompilationId())
+				.orElseThrow(IllegalArgumentException::new);
+
+		List<Machine> machines = Iterables.iterableToList(machineRepository.findAllById(command.getMachineIds()));
+		List<Workforce> workforces = Iterables.iterableToList(workforceRepository.findAllById(command.getMachineIds()));
+		List<Material> materials = Iterables.iterableToList(materialRepository.findAllById(command.getMachineIds()));
+
+		Resource resource = new Resource(resourceId, command.getCode(), command.getTitle(), compilation,
+				Collections.emptyMap(), machines, workforces, materials);
+
+		resourcesRepository.save(resource);
+	}
+
+	@DeleteMapping("/{resourceId}")
+	public void delete(@PathVariable long resourceId) {
+		workforceRepository.deleteById(resourceId);
 	}
 
 	@GetMapping
 	public ResourcesResponse getAll() {
 		List<ResourceDto> resourceDtos = StreamSupport.stream(resourcesRepository.findAll().spliterator(), false)
-				.map(resource -> new ResourceDto(resource.getId(), resource.getCode().toString(), resource.getTitle(),
-						resource.getMeasures()))
+				.map(resource -> new ResourceDto(resource.getCompilation().getId(), resource.getId(),
+						resource.getCode().toString(), resource.getTitle(), resource.getMeasures(),
+						resource.getWorkforces().stream().map(Workforce::getId).collect(Collectors.toList()),
+						resource.getMachines().stream().map(Machine::getId).collect(Collectors.toList()),
+						resource.getMaterials().stream().map(Material::getId).collect(Collectors.toList())))
 				.collect(Collectors.toList());
 
 		return new ResourcesResponse(resourceDtos, new StandardsDto());

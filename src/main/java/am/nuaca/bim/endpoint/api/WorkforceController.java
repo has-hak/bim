@@ -33,6 +33,18 @@ public class WorkforceController {
 		workforceRepository.save(workforce);
 	}
 
+	@PutMapping("/{workforceId}")
+	public void update(@PathVariable long workforceId, @RequestBody WorkforceCreationCommand command) {
+		Workforce workforce = new Workforce(workforceId, command.getCode(), command.getTitle(), command.getUnit(),
+				command.getUnitCost());
+		workforceRepository.save(workforce);
+	}
+
+	@DeleteMapping("/{workforceId}")
+	public void delete(@PathVariable long workforceId) {
+		workforceRepository.deleteById(workforceId);
+	}
+
 	@GetMapping
 	public List<WorkforceDto> getAll() {
 		return StreamSupport.stream(workforceRepository.findAll().spliterator(), false)

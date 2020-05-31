@@ -28,8 +28,8 @@ public class CompilationController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody CompilationCreationCommand compilationCreationCommand) {
-		compilationService.createCompilation(compilationCreationCommand);
+	public Integer create(@RequestBody CompilationCreationCommand compilationCreationCommand) {
+		return compilationService.createCompilation(compilationCreationCommand);
 	}
 
 	@PutMapping("/{compilationId}")

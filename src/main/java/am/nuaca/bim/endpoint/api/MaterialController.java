@@ -33,6 +33,18 @@ public class MaterialController {
 		materialRepository.save(material);
 	}
 
+	@PutMapping("/{materialId}")
+	public void update(@PathVariable long materialId, @RequestBody MaterialCreationCommand command) {
+		Material material = new Material(materialId, command.getCode(), command.getTitle(), command.getUnit(),
+				command.getUnitCost(), command.getMeasureType());
+		materialRepository.save(material);
+	}
+
+	@DeleteMapping("/{materialId}")
+	public void delete(@PathVariable long materialId) {
+		materialRepository.deleteById(materialId);
+	}
+
 	@GetMapping
 	public List<MaterialDto> getAll() {
 		return StreamSupport.stream(materialRepository.findAll().spliterator(), false)

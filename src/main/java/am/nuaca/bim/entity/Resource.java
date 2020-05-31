@@ -66,12 +66,28 @@ public class Resource {
 		return resource;
 	}
 
+	public Resource() {
+	}
+
+	public Resource(Long id, String code, String title, Compilation compilation,
+					Map<MeasureType, ResourceMeasureValue> measures, List<Machine> machines, List<Workforce> workforces,
+					List<Material> materials) {
+		this.id = id;
+		this.code = Code.fromString(code).toString();
+		this.title = title;
+		this.compilation = compilation;
+		this.measures = measures;
+		this.machines = machines;
+		this.workforces = workforces;
+		this.materials = materials;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public Code getCode() {
-		return new Code("06", "01", "107-1");
+		return Code.fromString(code);
 	}
 
 	public String getTitle() {

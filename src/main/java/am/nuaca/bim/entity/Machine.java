@@ -25,6 +25,14 @@ public class Machine {
 	public Machine() {
 	}
 
+	public Machine(Long id, String code, String title, double unit, double unitCost) {
+		this.id = id;
+		this.code = code;
+		this.title = title;
+		this.unit = unit;
+		this.unitCost = unitCost;
+	}
+
 	public Machine(String code, String title, double unit, double unitCost) {
 		this.code = code;
 		this.title = title;
@@ -37,7 +45,7 @@ public class Machine {
 	}
 
 	public Code getCode() {
-		return new Code("19", "100", "1005");
+		return Code.fromString(code);
 	}
 
 	public String getTitle() {

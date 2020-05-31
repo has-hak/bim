@@ -32,6 +32,18 @@ public class MachineController {
 		machineRepository.save(machine);
 	}
 
+	@PutMapping("/{machineId}")
+	public void update(@PathVariable long machineId, @RequestBody MachineCreationCommand command) {
+		Machine machine = new Machine(machineId, command.getCode(), command.getTitle(), command.getUnit(),
+				command.getUnitCost());
+		machineRepository.save(machine);
+	}
+
+	@DeleteMapping("/{machineId}")
+	public void delete(@PathVariable long machineId) {
+		machineRepository.deleteById(machineId);
+	}
+
 	@GetMapping
 	public List<MachineDto> getAll() {
 		return StreamSupport.stream(machineRepository.findAll().spliterator(), false)
