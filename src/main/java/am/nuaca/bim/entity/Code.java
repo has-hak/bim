@@ -16,7 +16,7 @@ public class Code {
 	}
 
 	public static Code fromString(String code) {
-		String[] parts = code.split(" ");
+		String[] parts = code.split("-");
 
 		String part1 = "";
 		String part2 = "";
