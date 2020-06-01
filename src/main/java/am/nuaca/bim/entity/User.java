@@ -27,6 +27,9 @@ public class User implements UserDetails {
 	@Column(name = "role")
 	private Set<Role> roles;
 
+	@OneToOne(mappedBy = "user")
+	private UserPreferences userPreferences;
+
 	public User() {
 	}
 
@@ -34,6 +37,10 @@ public class User implements UserDetails {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getEmail() {
@@ -44,9 +51,21 @@ public class User implements UserDetails {
 		return name;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles;
+	}
+
+	public void setUserPreferences(UserPreferences userPreferences) {
+		this.userPreferences = userPreferences;
+	}
+
+	public UserPreferences getUserPreferences() {
+		return userPreferences;
 	}
 
 	@Override

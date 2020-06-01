@@ -1,0 +1,32 @@
+package am.nuaca.bim.entity;
+
+import javax.persistence.*;
+
+/**
+ * @author Tigran Sargsyan on 01-Jun-20.
+ */
+@Entity
+@Table(name = "user_preferences")
+public class UserPreferences {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@OneToOne
+	private User user;
+
+	@OneToOne
+	private Language language;
+
+	public UserPreferences() {
+	}
+
+	public UserPreferences(Language language) {
+		this.language = language;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+}

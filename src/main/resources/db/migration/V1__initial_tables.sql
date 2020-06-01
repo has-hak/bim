@@ -15,9 +15,18 @@ CREATE TABLE `user_roles`
 
 CREATE TABLE `languages`
 (
-    `id`   int UNIQUE          NOT NULL,
+    `id`   int PRIMARY KEY,
     `name` varchar(255) UNIQUE NOT NULL,
     UNIQUE (id, name)
+);
+
+CREATE TABLE `user_preferences`
+(
+    `id`          bigint(20) PRIMARY KEY AUTO_INCREMENT,
+    `user_id`     bigint(20) UNIQUE NOT NULL,
+    `language_id` int               NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
 );
 
 CREATE TABLE `messages`
@@ -29,7 +38,7 @@ CREATE TABLE `messages`
 CREATE TABLE `compilations`
 (
     `id`    int PRIMARY KEY AUTO_INCREMENT,
-    `title` varchar(255) NOT NULL,
+    `title` varchar(255) UNIQUE NOT NULL,
     FULLTEXT KEY `title` (`title`)
 );
 
