@@ -2,6 +2,8 @@ package am.nuaca.bim.endpoint.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import am.nuaca.bim.dto.CompilationCreationCommand;
 import am.nuaca.bim.entity.Compilation;
 import am.nuaca.bim.service.CompilationService;
@@ -28,13 +30,13 @@ public class CompilationController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public Integer create(@RequestBody CompilationCreationCommand compilationCreationCommand) {
+	public Integer create(@Valid @RequestBody CompilationCreationCommand compilationCreationCommand) {
 		return compilationService.createCompilation(compilationCreationCommand);
 	}
 
 	@PutMapping("/{compilationId}")
 	public void update(@PathVariable int compilationId,
-					   @RequestBody CompilationCreationCommand compilationCreationCommand) {
+					   @Valid  @RequestBody CompilationCreationCommand compilationCreationCommand) {
 		compilationService.updateCompilation(compilationId, compilationCreationCommand);
 	}
 

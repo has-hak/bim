@@ -1,6 +1,7 @@
 package am.nuaca.bim.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import am.nuaca.bim.application.model.MeasureType;
 

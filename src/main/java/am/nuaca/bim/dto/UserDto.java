@@ -17,14 +17,14 @@ public class UserDto {
 
 	private final Set<Role> roles;
 
-	private final UserPreferencesDto userPreferences;
+	private final UserPreferencesDto preferences;
 
-	public UserDto(Long id, String email, String name, Set<Role> roles, UserPreferencesDto userPreferences) {
+	public UserDto(Long id, String email, String name, Set<Role> roles, UserPreferencesDto preferences) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.roles = roles;
-		this.userPreferences = userPreferences;
+		this.preferences = preferences;
 	}
 
 	public Long getId() {
@@ -43,7 +43,7 @@ public class UserDto {
 		return roles;
 	}
 
-	public UserPreferencesDto getUserPreferences() {
-		return userPreferences;
+	public UserPreferencesDto getPreferences() {
+		return preferences;
 	}
 }

@@ -71,7 +71,7 @@ public class CompilationService {
 				lettersToDelete = 0;
 			}
 
-			String modifiedWord = word.substring(0, length - lettersToDelete) + '*';
+			String modifiedWord = "+" + word.substring(0, length - lettersToDelete) + '*';
 
 			modifiedWords.add(modifiedWord);
 		}

@@ -21,17 +21,20 @@ public class BudgetDocumentReader {
 	private static final String THICKNESS_HEADER = "հաստություն";
 	private static final String AREA_HEADER = "մակերես";
 	private static final String VOLUME_HEADER = "ծավալ";
+	private static final String WEIGHT_HEADER = "քաշ";
 
 	private static final Set<String> KNOWN_HEADERS = Set.of(RESOURCE_TITLE_HEADER, HEIGHT_HEADER, THICKNESS_HEADER,
-			AREA_HEADER, VOLUME_HEADER);
+			AREA_HEADER, VOLUME_HEADER, WEIGHT_HEADER);
 
 	private static final Set<Tuple2<MeasureType, String>> KNOWN_MEASURE_HEADERS = Set.of(
 			Tuple.of(MeasureType.HEIGHT, HEIGHT_HEADER), Tuple.of(MeasureType.THICKNESS, THICKNESS_HEADER),
-			Tuple.of(MeasureType.AREA, AREA_HEADER), Tuple.of(MeasureType.VOLUME, VOLUME_HEADER));
+			Tuple.of(MeasureType.AREA, AREA_HEADER), Tuple.of(MeasureType.VOLUME, VOLUME_HEADER),
+			Tuple.of(MeasureType.WEIGHT, WEIGHT_HEADER));
 
 	private static final Map<String, Set<CellType>> SUPPORTED_CELL_TYPES = Map.of(RESOURCE_TITLE_HEADER,
 			Set.of(CellType.STRING), HEIGHT_HEADER, Set.of(CellType.NUMERIC), THICKNESS_HEADER,
-			Set.of(CellType.NUMERIC), AREA_HEADER, Set.of(CellType.NUMERIC), VOLUME_HEADER, Set.of(CellType.NUMERIC));
+			Set.of(CellType.NUMERIC), AREA_HEADER, Set.of(CellType.NUMERIC), VOLUME_HEADER, Set.of(CellType.NUMERIC),
+			WEIGHT_HEADER, Set.of(CellType.NUMERIC));
 
 	private final InputStream fileStream;
 
@@ -47,7 +50,7 @@ public class BudgetDocumentReader {
 		Row compilationNameRow = rowIterator.next();
 		Cell compilationNameCell = compilationNameRow.getCell(0);
 		if (compilationNameCell.getCellType() != CellType.STRING) {
-			throw new InvalidBudgetDocumentException("First row first cell must be String");
+			throw new InvalidBudgetDocumentException("First row must be Compilation Name");
 		}
 
 		String compilationName = compilationNameCell.getStringCellValue();
@@ -106,9 +109,9 @@ public class BudgetDocumentReader {
 
 					Set<CellType> cellTypes = SUPPORTED_CELL_TYPES.get(header.getName());
 					if (!cellTypes.contains(cellType)) {
-						throw new InvalidBudgetDocumentException(
+						throw new 	InvalidBudgetDocumentException(
 								String.format("Invalid cell type %s for header %s. Supported types are %s", cellType,
-										header, cellTypes));
+										header.name, cellTypes));
 					}
 
 					Object cellValue = getCellValue(cell);

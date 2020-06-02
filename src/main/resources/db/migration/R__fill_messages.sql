@@ -58,7 +58,7 @@ VALUES ('ENG', '{
 	   }'),
        ('ui.logout', '{
 		   "1": "Logout",
-		   "2": "Դուրս",
+		   "2": "Դուրս Գալ",
 		   "3": "Выход"
 	   }'),
        ('ui.main.data-view', '{
@@ -85,6 +85,11 @@ VALUES ('ENG', '{
 		   "1": "Not Selected",
 		   "2": "Ընտրված չէ",
 		   "3": "Не выбрано"
+	   }'),
+       ('ui.main.outlay-calculation.download-excel-version', '{
+		   "1": "Download Excel Version",
+		   "2": "Ներբեռնել Excel տարբերակը",
+		   "3": "Скачать Excel версию"
 	   }'),
        ('fields.id', '{
 		   "1": "ID",
@@ -117,9 +122,9 @@ VALUES ('ENG', '{
 		   "3": "Тип измирения"
 	   }'),
        ('ui.create', '{
-		   "1": "Create",
-		   "2": "Ավելացնել",
-		   "3": "Добавить"
+		   "1": "Save",
+		   "2": "Պահպանել",
+		   "3": "Сохранить"
 	   }'),
        ('ui.forms.compilation.create', '{
 		   "1": "Create new compilation",
@@ -275,6 +280,47 @@ VALUES ('ENG', '{
 		   "1": "N/A",
 		   "2": "Չկա",
 		   "3": "Н/П"
+	   }'),
+       ('validation.title.not-null', '{
+		   "1": "Title must be not null",
+		   "2": "Title must be not null",
+		   "3": "Title must be not null"
+	   }'),
+       ('validation.title.not-blank', '{
+		   "1": "Title must be non empty",
+		   "2": "Title must be non empty",
+		   "3": "Title must be non empty"
+	   }'),
+       ('validation.code.not-null', '{
+		   "1": "Code must be not null",
+		   "2": "Code must be not null",
+		   "3": "Code must be not null"
+	   }'),
+       ('validation.code.not-blank', '{
+		   "1": "Code must be non empty",
+		   "2": "Code must be non empty",
+		   "3": "Code must be non empty"
+	   }'),
+       ('validation.unit.not-null', '{
+		   "1": "Unit must be not null",
+		   "2": "Unit must be not null",
+		   "3": "Unit must be not null"
+	   }'),
+       ('validation.unitCost.not-null', '{
+		   "1": "Unit cost must be not null",
+		   "2": "Unit cost must be not null",
+		   "3": "Unit cost must be not null"
+	   }'),
+       ('validation.measureType.not-null', '{
+		   "1": "Measure type must be not null",
+		   "2": "Measure type must be not null",
+		   "3": "Measure type must be not null"
+	   }'),
+       ('validation.compilationId.not-null', '{
+		   "1": "Compilation must be not null",
+		   "2": "Compilation must be not null",
+		   "3": "Compilation must be not null"
 	   }');
+
 
 

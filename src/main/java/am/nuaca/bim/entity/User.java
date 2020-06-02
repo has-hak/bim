@@ -28,7 +28,7 @@ public class User implements UserDetails {
 	private Set<Role> roles;
 
 	@OneToOne(mappedBy = "user")
-	private UserPreferences userPreferences;
+	private UserPreferences preferences;
 
 	public User() {
 	}
@@ -60,12 +60,15 @@ public class User implements UserDetails {
 		return roles;
 	}
 
-	public void setUserPreferences(UserPreferences userPreferences) {
-		this.userPreferences = userPreferences;
+	public void setPreferences(UserPreferences userPreferences) {
+		this.preferences = userPreferences;
 	}
 
-	public UserPreferences getUserPreferences() {
-		return userPreferences;
+	public UserPreferences getPreferences() {
+		if (preferences == null) {
+			preferences = new UserPreferences();
+		}
+		return preferences;
 	}
 
 	@Override

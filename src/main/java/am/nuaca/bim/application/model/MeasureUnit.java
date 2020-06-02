@@ -146,6 +146,16 @@ public enum MeasureUnit {
 			case "մ3":
 			case "մ³":
 				return M3;
+			case "կգ":
+			case "kg":
+				return KG;
+			case "տ":
+			case "ton":
+				return TON;
+			case "մարդ-ժամ":
+				return HUMAN_HOUR;
+			case "մեքենա-ժամ":
+				return MACHINE_HOUR;
 			default:
 				throw new IllegalArgumentException(value);
 		}

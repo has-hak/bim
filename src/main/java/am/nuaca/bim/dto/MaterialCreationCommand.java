@@ -1,5 +1,8 @@
 package am.nuaca.bim.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import am.nuaca.bim.application.model.MeasureType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,19 +12,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class MaterialCreationCommand {
 
+	@NotBlank(message = "validation.code.not-blank")
+	@NotNull(message = "validation.code.not-null")
 	private final String code;
 
+	@NotBlank(message = "validation.title.not-blank")
+	@NotNull(message = "validation.title.not-null")
 	private final String title;
 
-	private final double unit;
+	@NotNull(message = "validation.unit.not-null")
+	private final Double unit;
 
-	private final double unitCost;
+	@NotNull(message = "validation.unitCost.not-null")
+	private final Double unitCost;
 
+	@NotNull(message = "validation.measureType.not-null")
 	private final MeasureType measureType;
 
 	@JsonCreator
 	public MaterialCreationCommand(@JsonProperty("code") String code, @JsonProperty("title") String title,
-								   @JsonProperty("unit") double unit, @JsonProperty("unitCost") double unitCost,
+								   @JsonProperty("unit") Double unit, @JsonProperty("unitCost") Double unitCost,
 								   @JsonProperty("measureType") MeasureType measureType) {
 		this.code = code;
 		this.title = title;
@@ -38,11 +48,11 @@ public class MaterialCreationCommand {
 		return title;
 	}
 
-	public double getUnit() {
+	public Double getUnit() {
 		return unit;
 	}
 
-	public double getUnitCost() {
+	public Double getUnitCost() {
 		return unitCost;
 	}
 

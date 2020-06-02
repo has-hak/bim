@@ -3,6 +3,7 @@ package am.nuaca.bim.endpoint.api;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
 
 import am.nuaca.bim.dto.WorkforceCreationCommand;
 import am.nuaca.bim.dto.WorkforceDto;
@@ -26,15 +27,15 @@ public class WorkforceController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody WorkforceCreationCommand command) {
+	public Long create(@Valid @RequestBody WorkforceCreationCommand command) {
 		Workforce workforce = new Workforce(command.getCode(), command.getTitle(), command.getUnit(),
 				command.getUnitCost());
 
-		workforceRepository.save(workforce);
+		return workforceRepository.save(workforce).getId();
 	}
 
 	@PutMapping("/{workforceId}")
-	public void update(@PathVariable long workforceId, @RequestBody WorkforceCreationCommand command) {
+	public void update(@PathVariable long workforceId, @Valid @RequestBody WorkforceCreationCommand command) {
 		Workforce workforce = new Workforce(workforceId, command.getCode(), command.getTitle(), command.getUnit(),
 				command.getUnitCost());
 		workforceRepository.save(workforce);

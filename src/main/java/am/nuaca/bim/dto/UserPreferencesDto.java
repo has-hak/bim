@@ -5,13 +5,13 @@ package am.nuaca.bim.dto;
  */
 public class UserPreferencesDto {
 
-	private final long languageId;
+	private final Integer languageId;
 
-	public UserPreferencesDto(long languageId) {
+	public UserPreferencesDto(Integer languageId) {
 		this.languageId = languageId;
 	}
 
-	public long getLanguageId() {
+	public Integer getLanguageId() {
 		return languageId;
 	}
 }

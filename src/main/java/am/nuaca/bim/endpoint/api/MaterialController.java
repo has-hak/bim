@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import javax.validation.Valid;
+
 import am.nuaca.bim.dto.MaterialCreationCommand;
 import am.nuaca.bim.dto.MaterialDto;
 import am.nuaca.bim.entity.Material;
@@ -26,15 +28,15 @@ public class MaterialController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody MaterialCreationCommand command) {
+	public Long create(@Valid @RequestBody MaterialCreationCommand command) {
 		Material material = new Material(command.getCode(), command.getTitle(), command.getUnit(),
 				command.getUnitCost(), command.getMeasureType());
 
-		materialRepository.save(material);
+		return materialRepository.save(material).getId();
 	}
 
 	@PutMapping("/{materialId}")
-	public void update(@PathVariable long materialId, @RequestBody MaterialCreationCommand command) {
+	public void update(@PathVariable long materialId, @Valid @RequestBody MaterialCreationCommand command) {
 		Material material = new Material(materialId, command.getCode(), command.getTitle(), command.getUnit(),
 				command.getUnitCost(), command.getMeasureType());
 		materialRepository.save(material);

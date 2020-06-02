@@ -2,6 +2,9 @@ package am.nuaca.bim.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,10 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ResourceCreationCommand {
 
-	private final int compilationId;
+	@NotNull(message = "validation.compilationId.not-null")
+	private final Integer compilationId;
 
+	@NotBlank(message = "validation.code.not-blank")
+	@NotNull(message = "validation.code.not-null")
 	private final String code;
 
+	@NotBlank(message = "validation.title.not-blank")
+	@NotNull(message = "validation.title.not-null")
 	private final String title;
 
 	private final List<Long> machineIds;
@@ -23,7 +31,7 @@ public class ResourceCreationCommand {
 	private final List<Long> materialIds;
 
 	@JsonCreator
-	public ResourceCreationCommand(@JsonProperty("compilationId") int compilationId, @JsonProperty("code") String code,
+	public ResourceCreationCommand(@JsonProperty("compilationId") Integer compilationId, @JsonProperty("code") String code,
 								   @JsonProperty("title") String title,
 								   @JsonProperty("machineIds") List<Long> machineIds,
 								   @JsonProperty("workforceIds") List<Long> workforceIds,
@@ -36,7 +44,7 @@ public class ResourceCreationCommand {
 		this.materialIds = materialIds;
 	}
 
-	public int getCompilationId() {
+	public Integer getCompilationId() {
 		return compilationId;
 	}
 

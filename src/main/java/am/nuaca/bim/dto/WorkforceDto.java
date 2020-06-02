@@ -1,5 +1,8 @@
 package am.nuaca.bim.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import am.nuaca.bim.application.model.MeasureType;
 
 /**

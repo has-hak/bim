@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
 
 import am.nuaca.bim.dto.ResourceCreationCommand;
 import am.nuaca.bim.dto.ResourceDto;
@@ -44,7 +45,7 @@ public class ResourceController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody ResourceCreationCommand command) {
+	public Long create(@Valid @RequestBody ResourceCreationCommand command) {
 		Compilation compilation = compilationRepository.findById(command.getCompilationId())
 				.orElseThrow(IllegalArgumentException::new);
 
@@ -55,17 +56,17 @@ public class ResourceController {
 		Resource resource = Resource.forCompilation(compilation, command.getCode(), command.getTitle(),
 				Collections.emptyMap(), machines, workforces, materials);
 
-		resourcesRepository.save(resource);
+		return resourcesRepository.save(resource).getId();
 	}
 
 	@PutMapping("/{resourceId}")
-	public void update(@PathVariable long resourceId, @RequestBody ResourceCreationCommand command) {
+	public void update(@PathVariable long resourceId, @Valid @RequestBody ResourceCreationCommand command) {
 		Compilation compilation = compilationRepository.findById(command.getCompilationId())
 				.orElseThrow(IllegalArgumentException::new);
 
 		List<Machine> machines = Iterables.iterableToList(machineRepository.findAllById(command.getMachineIds()));
-		List<Workforce> workforces = Iterables.iterableToList(workforceRepository.findAllById(command.getMachineIds()));
-		List<Material> materials = Iterables.iterableToList(materialRepository.findAllById(command.getMachineIds()));
+		List<Workforce> workforces = Iterables.iterableToList(workforceRepository.findAllById(command.getWorkforceIds()));
+		List<Material> materials = Iterables.iterableToList(materialRepository.findAllById(command.getMaterialIds()));
 
 		Resource resource = new Resource(resourceId, command.getCode(), command.getTitle(), compilation,
 				Collections.emptyMap(), machines, workforces, materials);
@@ -75,7 +76,7 @@ public class ResourceController {
 
 	@DeleteMapping("/{resourceId}")
 	public void delete(@PathVariable long resourceId) {
-		workforceRepository.deleteById(resourceId);
+		resourcesRepository.deleteById(resourceId);
 	}
 
 	@GetMapping

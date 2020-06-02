@@ -8,14 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UserPreferencesUpdateCommand {
 
-	private final long languageId;
+	private final Integer languageId;
 
 	@JsonCreator
-	public UserPreferencesUpdateCommand(@JsonProperty("languageId") long languageId) {
+	public UserPreferencesUpdateCommand(@JsonProperty("languageId") Integer languageId) {
 		this.languageId = languageId;
 	}
 
-	public long getLanguageId() {
+	public Integer getLanguageId() {
 		return languageId;
 	}
 }

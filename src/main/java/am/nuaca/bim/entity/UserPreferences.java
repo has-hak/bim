@@ -26,6 +26,10 @@ public class UserPreferences {
 		this.language = language;
 	}
 
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
 	public Language getLanguage() {
 		return language;
 	}

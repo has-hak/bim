@@ -1,6 +1,7 @@
 package am.nuaca.bim.endpoint.api;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import am.nuaca.bim.entity.Material;
 import am.nuaca.bim.entity.Resource;
 import am.nuaca.bim.entity.Workforce;
 import am.nuaca.bim.service.OutlayService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +51,8 @@ public class OutlayController {
 		response.setContentType("application/force-download");
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
+		// InputStream resourceAsStream = getClass().getResourceAsStream("/db/migration/V1__initial_tables.sql");
+		// IOUtils.copy(resourceAsStream,response.getOutputStream());
 		outlayService.calculateOutlayFromBudgetDocument(document.getInputStream(), response.getOutputStream());
 	}
 

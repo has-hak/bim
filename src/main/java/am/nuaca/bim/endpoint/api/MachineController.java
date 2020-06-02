@@ -3,6 +3,7 @@ package am.nuaca.bim.endpoint.api;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
 
 import am.nuaca.bim.dto.MachineCreationCommand;
 import am.nuaca.bim.dto.MachineDto;
@@ -26,14 +27,14 @@ public class MachineController {
 
 	@PostMapping
 	@Secured({"MANAGER", "ADMIN"})
-	public void create(@RequestBody MachineCreationCommand command) {
+	public Long create(@Valid @RequestBody MachineCreationCommand command) {
 		Machine machine = new Machine(command.getCode(), command.getTitle(), command.getUnit(), command.getUnitCost());
 
-		machineRepository.save(machine);
+		return machineRepository.save(machine).getId();
 	}
 
 	@PutMapping("/{machineId}")
-	public void update(@PathVariable long machineId, @RequestBody MachineCreationCommand command) {
+	public void update(@PathVariable long machineId, @Valid @RequestBody MachineCreationCommand command) {
 		Machine machine = new Machine(machineId, command.getCode(), command.getTitle(), command.getUnit(),
 				command.getUnitCost());
 		machineRepository.save(machine);
