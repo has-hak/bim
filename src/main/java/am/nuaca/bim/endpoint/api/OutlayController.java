@@ -51,8 +51,6 @@ public class OutlayController {
 		response.setContentType("application/force-download");
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
-		// InputStream resourceAsStream = getClass().getResourceAsStream("/db/migration/V1__initial_tables.sql");
-		// IOUtils.copy(resourceAsStream,response.getOutputStream());
 		outlayService.calculateOutlayFromBudgetDocument(document.getInputStream(), response.getOutputStream());
 	}
 
