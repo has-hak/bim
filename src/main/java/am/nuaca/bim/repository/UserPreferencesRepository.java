@@ -6,4 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * @author Tigran Sargsyan on 05-Jun-20.
  */
-public interface UserPreferencesRepository extends CrudRepository<UserPreferences, Long> {}
+public interface UserPreferencesRepository extends CrudRepository<UserPreferences, Long> {
+
+	UserPreferences findByUserId(long userId);
+}

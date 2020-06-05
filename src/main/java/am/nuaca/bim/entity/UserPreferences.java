@@ -22,7 +22,8 @@ public class UserPreferences {
 	public UserPreferences() {
 	}
 
-	public UserPreferences(Language language) {
+	public UserPreferences(User user, Language language) {
+		this.user = user;
 		this.language = language;
 	}
 

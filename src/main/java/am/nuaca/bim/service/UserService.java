@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public UserPreferences getPreferences(long userId) {
-		return userRepository.findById(userId).orElseThrow(IllegalArgumentException::new).getPreferences();
+		return userPreferencesRepository.findByUserId(userId);
 	}
 
 	public void updatePreferences(long userId, UserPreferencesUpdateCommand command) {

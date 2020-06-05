@@ -66,7 +66,7 @@ public class User implements UserDetails {
 
 	public UserPreferences getPreferences() {
 		if (preferences == null) {
-			preferences = new UserPreferences();
+			preferences = new UserPreferences(this, null);
 		}
 		return preferences;
 	}
