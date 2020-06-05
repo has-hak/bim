@@ -24,7 +24,7 @@ CREATE TABLE `user_preferences`
 (
     `id`          bigint(20) PRIMARY KEY AUTO_INCREMENT,
     `user_id`     bigint(20) UNIQUE NOT NULL,
-    `language_id` int               NOT NULL,
+    `language_id` int,
     FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
     FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
 );
