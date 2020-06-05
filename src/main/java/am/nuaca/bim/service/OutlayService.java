@@ -50,7 +50,7 @@ public class OutlayService {
 
 		List<Compilation> compilations = compilationService.searchByName(budgetDocument.getCompilationName());
 		if (compilations.isEmpty()) {
-			throw new IllegalArgumentException("No compilation found");
+			throw new IllegalArgumentException("Compilation not found");
 		}
 		Compilation compilation = compilations.get(0);
 

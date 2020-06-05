@@ -27,8 +27,8 @@ public class GlobalExceptionController {
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(InvalidBudgetDocumentException.class)
-	public String handleValidationExceptions(InvalidBudgetDocumentException ex) {
+	@ExceptionHandler({InvalidBudgetDocumentException.class, IllegalArgumentException.class})
+	public String handleValidationExceptions(Exception ex) {
 		return ex.getMessage();
 	}
 
