@@ -9,6 +9,7 @@ import am.nuaca.bim.entity.User;
 import am.nuaca.bim.entity.UserPreferences;
 import am.nuaca.bim.helper.Iterables;
 import am.nuaca.bim.repository.LanguageRepository;
+import am.nuaca.bim.repository.UserPreferencesRepository;
 import am.nuaca.bim.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,9 +27,13 @@ public class UserService implements UserDetailsService {
 
 	private final LanguageRepository languageRepository;
 
-	public UserService(UserRepository userRepository, LanguageRepository languageRepository) {
+	private final UserPreferencesRepository userPreferencesRepository;
+
+	public UserService(UserRepository userRepository, LanguageRepository languageRepository,
+					   UserPreferencesRepository userPreferencesRepository) {
 		this.userRepository = userRepository;
 		this.languageRepository = languageRepository;
+		this.userPreferencesRepository = userPreferencesRepository;
 	}
 
 	public List<User> getAllUsers() {
@@ -57,6 +62,11 @@ public class UserService implements UserDetailsService {
 		User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
 
 		UserPreferences userPreferences = user.getPreferences();
+		if (userPreferences.getId() == null) {
+			userPreferences = userPreferencesRepository.save(userPreferences);
+			user.setPreferences(userPreferences);
+		}
+
 		if (command.getLanguageId() != null) {
 			Language language = languageRepository.findById(command.getLanguageId())
 					.orElseThrow(IllegalArgumentException::new);
