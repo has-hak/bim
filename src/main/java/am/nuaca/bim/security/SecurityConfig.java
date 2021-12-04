@@ -36,23 +36,25 @@ public class SecurityConfig {
 		final CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
 		// Don't do this in production, use a proper list  of allowed origins
-		config.setAllowedOrigins(Collections.singletonList("*"));
+		config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
 		config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
 
-	@Bean
+	/*@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry) {
+			public void addCorsMappings(
+					CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH")
-						.allowedOrigins("*")
+						.allowedOrigins("http://localhost:3000")
+						.allowCredentials(true)
 						.allowedHeaders("*");
 			}
 		};
-	}
+	}*/
 }
