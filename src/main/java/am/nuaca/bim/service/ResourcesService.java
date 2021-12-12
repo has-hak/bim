@@ -8,7 +8,7 @@ import am.nuaca.bim.repository.ResourcesRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Tigran Sargsyan on 16-Apr-20.
+ * @author Ani Khachatryan on 16-Apr-20.
  */
 @Service
 public class ResourcesService {

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 @RestController
 @RequestMapping("api/outlay")

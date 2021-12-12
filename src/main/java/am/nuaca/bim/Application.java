@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 @SpringBootApplication
 public class Application {

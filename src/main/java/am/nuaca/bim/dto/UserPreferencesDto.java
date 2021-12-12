@@ -1,7 +1,7 @@
 package am.nuaca.bim.dto;
 
 /**
- * @author Tigran Sargsyan on 01-Jun-20.
+ * @author Ani Khachatryan on 01-Jun-20.
  */
 public class UserPreferencesDto {
 

@@ -4,6 +4,6 @@ import am.nuaca.bim.entity.Workforce;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @author Tigran Sargsyan on 12-May-20.
+ * @author Ani Khachatryan on 12-May-20.
  */
 public interface WorkforceRepository extends CrudRepository<Workforce, Long> {}

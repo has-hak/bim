@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 public interface CompilationRepository extends CrudRepository<Compilation, Integer> {
 

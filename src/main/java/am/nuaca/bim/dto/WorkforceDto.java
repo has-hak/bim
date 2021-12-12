@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import am.nuaca.bim.application.model.MeasureType;
 
 /**
- * @author Tigran Sargsyan on 17-Apr-20.
+ * @author Ani Khachatryan on 17-Apr-20.
  */
 public class WorkforceDto {
 

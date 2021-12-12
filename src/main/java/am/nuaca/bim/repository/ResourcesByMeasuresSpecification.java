@@ -11,7 +11,7 @@ import am.nuaca.bim.service.ResourceSearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 /**
- * @author Tigran Sargsyan on 17-Apr-20.
+ * @author Ani Khachatryan on 17-Apr-20.
  */
 public class ResourcesByMeasuresSpecification implements Specification<Resource> {
 

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Tigran Sargsyan on 16-Apr-20.
+ * @author Ani Khachatryan on 16-Apr-20.
  */
 public class ResourceMeasureValue implements Serializable {
 

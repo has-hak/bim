@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 @Configuration
 public class SecurityConfig {

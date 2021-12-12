@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Tigran Sargsyan on 06-May-20.
+ * @author Ani Khachatryan on 06-May-20.
  */
 public class LoginRequest {
 

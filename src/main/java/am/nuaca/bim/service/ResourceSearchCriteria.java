@@ -3,7 +3,7 @@ package am.nuaca.bim.service;
 import java.util.List;
 
 /**
- * @author Tigran Sargsyan on 17-Apr-20.
+ * @author Ani Khachatryan on 17-Apr-20.
  */
 public class ResourceSearchCriteria {
 

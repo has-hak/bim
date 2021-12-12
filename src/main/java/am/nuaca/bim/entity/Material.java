@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import am.nuaca.bim.application.model.MeasureType;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 @Entity
 @Table(name = "materials")

@@ -3,7 +3,7 @@ package am.nuaca.bim.application.model;
 import java.util.List;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 public class BudgetDocument {
 

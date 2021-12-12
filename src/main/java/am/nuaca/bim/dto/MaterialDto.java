@@ -3,7 +3,7 @@ package am.nuaca.bim.dto;
 import am.nuaca.bim.application.model.MeasureType;
 
 /**
- * @author Tigran Sargsyan on 17-Apr-20.
+ * @author Ani Khachatryan on 17-Apr-20.
  */
 public class MaterialDto {
 

@@ -7,7 +7,7 @@ import am.nuaca.bim.application.model.MeasureType;
 import am.nuaca.bim.entity.ResourceMeasureValue;
 
 /**
- * @author Tigran Sargsyan on 17-Apr-20.
+ * @author Ani Khachatryan on 17-Apr-20.
  */
 public class ResourceDto {
 

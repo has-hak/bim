@@ -1,7 +1,7 @@
 package am.nuaca.bim.application.model;
 
 /**
- * @author Tigran Sargsyan on 16-Apr-20.
+ * @author Ani Khachatryan on 16-Apr-20.
  */
 public enum MeasureUnit {
 	MM("մմ") {

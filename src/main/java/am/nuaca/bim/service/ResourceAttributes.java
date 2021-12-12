@@ -5,7 +5,7 @@ import java.util.List;
 import am.nuaca.bim.application.model.Measure;
 
 /**
- * @author Tigran Sargsyan on 01-May-20.
+ * @author Ani Khachatryan on 01-May-20.
  */
 public class ResourceAttributes {
 

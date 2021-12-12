@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Tigran Sargsyan on 01-Jun-20.
+ * @author Ani Khachatryan on 01-Jun-20.
  */
 public class UserPreferencesUpdateCommand {
 

@@ -5,7 +5,7 @@ import java.util.Set;
 import am.nuaca.bim.entity.Role;
 
 /**
- * @author Tigran Sargsyan on 01-Jun-20.
+ * @author Ani Khachatryan on 01-Jun-20.
  */
 public class UserDto {
 

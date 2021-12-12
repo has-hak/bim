@@ -14,7 +14,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * @author Tigran Sargsyan on 27-Apr-20.
+ * @author Ani Khachatryan on 27-Apr-20.
  */
 public class OutlayDocumentBuilder {
 

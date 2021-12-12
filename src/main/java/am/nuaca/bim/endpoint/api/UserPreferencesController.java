@@ -11,7 +11,7 @@ import am.nuaca.bim.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Tigran Sargsyan on 01-Jun-20.
+ * @author Ani Khachatryan on 01-Jun-20.
  */
 @RestController
 @RequestMapping("api/users/me/preferences")

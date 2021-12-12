@@ -13,7 +13,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Tigran Sargsyan on 12-May-20.
+ * @author Ani Khachatryan on 12-May-20.
  */
 @RestController
 @RequestMapping("/api/workforces")

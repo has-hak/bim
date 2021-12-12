@@ -14,7 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Tigran Sargsyan on 07-May-20.
+ * @author Ani Khachatryan on 07-May-20.
  */
 @RestController
 @RequestMapping("/api/materials")

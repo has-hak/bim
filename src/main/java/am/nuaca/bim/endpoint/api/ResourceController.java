@@ -17,7 +17,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Tigran Sargsyan on 16-Apr-20.
+ * @author Ani Khachatryan on 16-Apr-20.
  */
 @RestController
 @RequestMapping("api/resources")

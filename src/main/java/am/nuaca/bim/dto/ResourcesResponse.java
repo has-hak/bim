@@ -3,7 +3,7 @@ package am.nuaca.bim.dto;
 import java.util.List;
 
 /**
- * @author Tigran Sargsyan on 06-May-20.
+ * @author Ani Khachatryan on 06-May-20.
  */
 public class ResourcesResponse {
 

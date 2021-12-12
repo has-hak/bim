@@ -6,7 +6,7 @@ import am.nuaca.bim.application.model.MeasureType;
 import am.nuaca.bim.application.model.MeasureUnit;
 
 /**
- * @author Tigran Sargsyan on 18-Apr-20.
+ * @author Ani Khachatryan on 18-Apr-20.
  */
 public class Standards {
 

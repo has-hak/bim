@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author Tigran Sargsyan on 23-May-20.
+ * @author Ani Khachatryan on 23-May-20.
  */
 
 @RestController

@@ -20,7 +20,7 @@ import am.nuaca.bim.entity.Resource;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Tigran Sargsyan on 15-Apr-20.
+ * @author Ani Khachatryan on 15-Sep-21.
  */
 @Service
 public class OutlayService {

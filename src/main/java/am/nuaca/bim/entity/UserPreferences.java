@@ -3,7 +3,7 @@ package am.nuaca.bim.entity;
 import javax.persistence.*;
 
 /**
- * @author Tigran Sargsyan on 01-Jun-20.
+ * @author Ani Khachatryan on 01-Jun-20.
  */
 @Entity
 @Table(name = "user_preferences")

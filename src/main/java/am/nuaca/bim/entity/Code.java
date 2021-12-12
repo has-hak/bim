@@ -1,7 +1,7 @@
 package am.nuaca.bim.entity;
 
 /**
- * @author Tigran Sargsyan on 01-May-20.
+ * @author Ani Khachatryan on 01-May-20.
  */
 public class Code {
 

@@ -5,7 +5,7 @@ import java.util.List;
 import am.nuaca.bim.application.model.MeasureType;
 
 /**
- * @author Tigran Sargsyan on 12-May-20.
+ * @author Ani Khachatryan on 12-May-20.
  */
 public class BudgetDocumentDto {
 
